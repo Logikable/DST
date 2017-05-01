@@ -38,6 +38,12 @@ Assets = {
 
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
+local FOODTYPE = GLOBAL.FOODTYPE
+
+-- changing up data about existing items
+AddPrefabPostInit("flint", function(inst)
+	inst.components.edible.hungervalue = 1.875
+	end)
 
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.wollum = "The Sample Character"
@@ -55,4 +61,3 @@ AddMinimapAtlas("images/map_icons/wollum.xml")
 
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
 AddModCharacter("wollum", "NEUTRAL")
-

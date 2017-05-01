@@ -36,7 +36,13 @@ end
 -- This initializes for both the server and client. Tags can be added here.
 local common_postinit = function(inst) 
 	-- Minimap icon
-	inst.MiniMapEntity:SetIcon( "wollum.tex" )
+	inst.MiniMapEntity:SetIcon("wollum.tex")
+end
+
+local function OnEat(inst, food)
+	if food.prefab == "flint" then
+		inst.components.hunger:DoDelta(TUNING.CALORIES_SUPERHUGE)
+	end
 end
 
 -- This initializes for the server only. Components are added here.
@@ -48,10 +54,13 @@ local master_postinit = function(inst)
     --inst.talker_path_override = "dontstarve_DLC001/characters/"
 	
 	-- Stats	
-	inst.components.health:SetMaxHealth(150)
+	inst.components.health:SetMaxHealth(300)
 	inst.components.hunger:SetMax(150)
 	inst.components.sanity:SetMax(200)
-	
+
+	inst.components.eater:SetDiet({FOODTYPE.ELEMENTAL}, {FOODTYPE.ELEMENTAL})
+	inst.components.eater:SetOnEatFn(OnEat)
+
 	-- Damage multiplier (optional)
     inst.components.combat.damagemultiplier = 1
 	
