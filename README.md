@@ -9,7 +9,7 @@ Wollum is a Don't Starve Together modification that introduces a new character. 
 
 Wollum is still in the Alpha phase, and is still missing a model, animations, and most of his voice lines. We hope to implement these soon enough and smooth out the imperfections in his numbers.
 
-#### Collaborators:
+#### Collaborators
 Thanks to proana for a whole shebang of contributions - game knowledge advising, character design, balancing, testing, etc.
 
 Thanks to Uas for creative insights.
