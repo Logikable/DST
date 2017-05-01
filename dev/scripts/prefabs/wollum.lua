@@ -39,9 +39,16 @@ local common_postinit = function(inst)
 	inst.MiniMapEntity:SetIcon("wollum.tex")
 end
 
+FOODS = {}
+
 local function OnEat(inst, food)
-	if food.prefab == "flint" then
-		inst.components.hunger:DoDelta(TUNING.CALORIES_SUPERHUGE)
+	if FOODS[food.prefab] then
+		if inst.components.hunger <= inst.components.hunger.max - food.components.edible.hungervalue then
+			inst.components.hunger:DoDelta(FOODS[food.prefab].hunger)
+		end
+		inst.components.hunger:DoDelta(FOODS[food.prefab].hunger - food.components.edible.hungervalue)
+		inst.components.health:DoDelta(FOODS[food.prefab].health - food.components.edible.healthvalue)
+		inst.components.sanity:DoDelta(FOODS[food.prefab].sanity)
 	end
 end
 
@@ -70,6 +77,18 @@ local master_postinit = function(inst)
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
 	
+	FOODS.rocks = {hunger=3.125, health=0, sanity=0}
+	FOODS.cutstone = {hunger=7.5, health=3, sanity=0}
+	FOODS.flint = {hunger=1.875, health=1, sanity=0}
+	FOODS.nitre = {hunger=9.375, health=0, sanity=-5}
+	FOODS.goldnugget = {hunger=0, health=0, sanity=5}
+	FOODS.marble = {hunger=20, health=0, sanity=0}
+	FOODS.redgem = {hunger=32.5, health=30, sanity=5}
+	FOODS.bluegem = {hunger=25, health=5, sanity=5}
+	FOODS.purplegem = {hunger=75, health=60, sanity=-15}
+	FOODS.opalpreciousgem = {hunger=150, health=300, sanity=200}
+	FOODS.thulecite_pieces = {hunger=0, health=12, sanity=-5}
+	FOODS.thulecite = {hunger=0, health=75, sanity=-20}
 end
 
 return MakePlayerCharacter("wollum", prefabs, assets, common_postinit, master_postinit, start_inv)

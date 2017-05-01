@@ -41,8 +41,13 @@ local STRINGS = GLOBAL.STRINGS
 local FOODTYPE = GLOBAL.FOODTYPE
 
 -- changing up data about existing items
-AddPrefabPostInit("flint", function(inst)
-	inst.components.edible.hungervalue = 1.875
+AddPrefabPostInit("cutstone", function(inst)
+	inst:AddComponent("edible")
+	inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
+	end)
+AddPrefabPostInit("marble", function(inst)
+	inst:AddComponent("edible")
+	inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
 	end)
 
 -- The character select screen lines

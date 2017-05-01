@@ -2,7 +2,7 @@
 name = "Wollum"
 description = "Eats rocks."
 author = "Logikable & mobobobo"
-version = "0.1.14" -- This is the version of the template. Change it to your own number.
+version = "0.1.20" -- This is the version of the template. Change it to your own number.
 
 -- This is the URL name of the mod's thread on the forum; the part after the ? and before the first & in the url
 forumthread = "/"
