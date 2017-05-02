@@ -42,10 +42,6 @@ end
 FOODS = {}
 
 local function OnEat(inst, food)
-	-- eating gems may change your temperature
-	if food.prefab == "redgem" then
-		
-
 	-- effects of eating food - hunger, health, sanity
 	if FOODS[food.prefab] then
 		inst.components.hunger:DoDelta(FOODS[food.prefab].hunger - food.components.edible.hungervalue)

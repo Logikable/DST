@@ -1,3 +1,4 @@
+0.2.2: hotfix for crash
 0.2.1: red and blue gems now affect your temperature: +-40 for 10 seconds
 0.1.26: changed health_small/med/etc. to healing_small/med/etc.
 	first stable update
