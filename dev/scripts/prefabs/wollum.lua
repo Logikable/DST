@@ -43,11 +43,8 @@ FOODS = {}
 
 local function OnEat(inst, food)
 	if FOODS[food.prefab] then
-		if inst.components.hunger <= inst.components.hunger.max - food.components.edible.hungervalue then
-			inst.components.hunger:DoDelta(FOODS[food.prefab].hunger)
-		end
 		inst.components.hunger:DoDelta(FOODS[food.prefab].hunger - food.components.edible.hungervalue)
-		inst.components.health:DoDelta(FOODS[food.prefab].health - food.components.edible.healthvalue)
+		inst.components.health:DoDelta(FOODS[food.prefab].health)
 		inst.components.sanity:DoDelta(FOODS[food.prefab].sanity)
 	end
 end
@@ -65,30 +62,35 @@ local master_postinit = function(inst)
 	inst.components.hunger:SetMax(150)
 	inst.components.sanity:SetMax(200)
 
-	inst.components.eater:SetDiet({FOODTYPE.ELEMENTAL}, {FOODTYPE.ELEMENTAL})
+	inst.components.eater:SetDiet({FOODTYPE.ELEMENTAL, FOODTYPE.WOLLUM}, {FOODTYPE.ELEMENTAL, FOODTYPE.WOLLUM})
 	inst.components.eater:SetOnEatFn(OnEat)
 
 	-- Damage multiplier (optional)
     inst.components.combat.damagemultiplier = 1
 	
 	-- Hunger rate (optional)
-	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
+	inst.components.hunger.hungerrate = 0.5 * TUNING.WILSON_HUNGER_RATE
 	
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
 	
-	FOODS.rocks = {hunger=3.125, health=0, sanity=0}
-	FOODS.cutstone = {hunger=7.5, health=3, sanity=0}
-	FOODS.flint = {hunger=1.875, health=1, sanity=0}
-	FOODS.nitre = {hunger=9.375, health=0, sanity=-5}
-	FOODS.goldnugget = {hunger=0, health=0, sanity=5}
-	FOODS.marble = {hunger=20, health=0, sanity=0}
-	FOODS.redgem = {hunger=32.5, health=30, sanity=5}
-	FOODS.bluegem = {hunger=25, health=5, sanity=5}
-	FOODS.purplegem = {hunger=75, health=60, sanity=-15}
-	FOODS.opalpreciousgem = {hunger=150, health=300, sanity=200}
-	FOODS.thulecite_pieces = {hunger=0, health=12, sanity=-5}
-	FOODS.thulecite = {hunger=0, health=75, sanity=-20}
+    -- default food values
+	FOODS.rocks = {hunger=TUNING.CALORIES_TINY, health=0, sanity=0}
+	FOODS.cutstone = {hunger=TUNING.CALORIES_LARGE, health=TUNING.HEALTH_SMALL, sanity=0}
+	FOODS.flint = {hunger=TUNING.CALORIES_SMALL, health=TUNING.HEALTH_TINY, sanity=0}
+	FOODS.nitre = {hunger=TUNING.CALORIES_MEDSMALL, health=-TUNING.HEALTH_MEDSMALL, sanity=0}
+	FOODS.goldnugget = {hunger=TUNING.CALORIES_TINY, health=0, sanity=TUNING.SANITY_MED}
+	FOODS.marble = {hunger=TUNING.CALORIES_MED, health=TUNING.HEALTH_TINY, sanity=0}
+	FOODS.moonrocknugget = {hunger=TUNING.CALORIES_MED, health=TUNING.HEALTH_SMALL, sanity=TUNING.SANITY_TINY}
+	FOODS.redgem = {hunger=TUNING.CALORIES_MEDSMALL, health=TUNING.HEALTH_MED, sanity=TUNING.SANITY_MED}
+	FOODS.bluegem = {hunger=TUNING.CALORIES_MEDSMALL, health=TUNING.HEALTH_MEDSMALL, sanity=TUNING.SANITY_LARGE}
+	FOODS.purplegem = {hunger=TUNING.CALORIES_HUGE, health=TUNING.HEALTH_LARGE, sanity=-TUNING.SANITY_LARGE}
+	FOODS.greengem = {hunger=TUNING.CALORIES_MEDSMALL, health=TUNING.HEALTH_TINY, sanity=TUNING.SANITY_HUGE}
+	FOODS.yellowgem = {hunger=TUNING.CALORIES_MEDSMALL, health=TUNING.HEALTH_MEDSMALL, sanity=-TUNING.SANITY_MED}
+	FOODS.orangegem = {hunger=TUNING.CALORIES_HUGE, health=TUNING.HEALTH_MEDLARGE, sanity=TUNING.SANITY_MEDLARGE}
+	FOODS.opalpreciousgem = {hunger=TUNING.CALORIES_SUPERHUGE, health=TUNING.HEALTH_SUPERHUGE, sanity=TUNING.SANITY_HUGE}
+	FOODS.thulecite_pieces = {hunger=TUNING.CALORIES_SMALL, health=TUNING.HEALTH_MEDSMALL, sanity=-TUNING.SANITY_SMALL}
+	FOODS.thulecite = {hunger=TUNING.CALORIES_MEDSMALL, health=TUNING.HEALTH_HUGE, sanity=-TUNING.SANITY_LARGE}
 end
 
 return MakePlayerCharacter("wollum", prefabs, assets, common_postinit, master_postinit, start_inv)

@@ -41,14 +41,26 @@ local STRINGS = GLOBAL.STRINGS
 local FOODTYPE = GLOBAL.FOODTYPE
 
 -- changing up data about existing items
+FOODTYPE.WOLLUM = "WOLLUM"
 AddPrefabPostInit("cutstone", function(inst)
 	inst:AddComponent("edible")
-	inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
+	inst.components.edible.hungervalue = 0
+	inst.components.edible.foodtype = FOODTYPE.WOLLUM
 	end)
 AddPrefabPostInit("marble", function(inst)
 	inst:AddComponent("edible")
-	inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
+	inst.components.edible.hungervalue = 0
+	inst.components.edible.foodtype = FOODTYPE.WOLLUM
 	end)
+
+ELEMENTALFOOD = {"rocks", "cutstone", "flint", "nitre", "goldnugget", "marble", "moonrocknugget", "redgem", "bluegem",
+	"purplegem", "greengem", "yellowgem", "orangegem", "opalpreciousgem", "thulecite_pieces", "thulecite"}
+
+for i = 1, #ELEMENTALFOOD do
+	AddPrefabPostInit(ELEMENTALFOOD[i], function(inst)
+		inst.components.edible.healthvalue = 0
+		end)
+end
 
 -- The character select screen lines
 STRINGS.CHARACTER_TITLES.wollum = "The Sample Character"
