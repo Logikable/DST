@@ -38,6 +38,7 @@ Assets = {
 
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
+local TUNING = GLOBAL.TUNING
 local FOODTYPE = GLOBAL.FOODTYPE
 
 -- changing up data about existing items
@@ -51,6 +52,14 @@ AddPrefabPostInit("marble", function(inst)
 	inst:AddComponent("edible")
 	inst.components.edible.hungervalue = 0
 	inst.components.edible.foodtype = FOODTYPE.WOLLUM
+	end)
+AddPrefabPostInit("redgem", function(inst)
+	inst.components.edible.temperaturedelta = TUNING.HOT_FOOD_BONUS_TEMP
+	inst.components.edible.temperatureduration = TUNING.FOOD_TEMP_AVERAGE
+	end)
+AddPrefabPostInit("bluegem", function(inst)
+	inst.components.edible.temperaturedelta = TUNING.COLD_FOOD_BONUS_TEMP
+	inst.components.edible.temperatureduration = TUNING.FOOD_TEMP_AVERAGE
 	end)
 
 ELEMENTALFOOD = {"rocks", "cutstone", "flint", "nitre", "goldnugget", "marble", "moonrocknugget", "redgem", "bluegem",

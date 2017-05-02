@@ -42,6 +42,11 @@ end
 FOODS = {}
 
 local function OnEat(inst, food)
+	-- eating gems may change your temperature
+	if food.prefab == "redgem" then
+		
+
+	-- effects of eating food - hunger, health, sanity
 	if FOODS[food.prefab] then
 		inst.components.hunger:DoDelta(FOODS[food.prefab].hunger - food.components.edible.hungervalue)
 		inst.components.health:DoDelta(FOODS[food.prefab].health)
@@ -62,6 +67,7 @@ local master_postinit = function(inst)
 	inst.components.hunger:SetMax(150)
 	inst.components.sanity:SetMax(200)
 
+	-- changes up his diet a bit so it only allows minerals
 	inst.components.eater:SetDiet({FOODTYPE.ELEMENTAL, FOODTYPE.WOLLUM}, {FOODTYPE.ELEMENTAL, FOODTYPE.WOLLUM})
 	inst.components.eater:SetOnEatFn(OnEat)
 
