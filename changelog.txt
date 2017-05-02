@@ -1,0 +1,3 @@
+0.1.26: changed health_small/med/etc. to healing_small/med/etc.
+	first stable update
+0.1.25: introduced changelog
