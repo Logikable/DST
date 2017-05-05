@@ -42,6 +42,17 @@ end
 FOODS = {}
 
 local function OnEat(inst, food)
+	if food.prefab == "yellowgem" then
+		inst.Light:Enable(true)
+		inst:DoTaskInTime(8 * 60, function(inst)	-- full day is 8 minutes
+			inst.Light:Enable(false)
+			end)
+	end
+	if food.prefab == "orangegem" then
+		inst:PushEvent("yawn", { grogginess = 4, knockoutduration = TUNING.MANDRAKE_SLEEP_TIME})
+		inst.components.sleeper:AddSleepiness(7, TUNING.MANDRAKE_SLEEP_TIME)
+	end
+
 	-- effects of eating food - hunger, health, sanity
 	if FOODS[food.prefab] then
 		inst.components.hunger:DoDelta(FOODS[food.prefab].hunger - food.components.edible.hungervalue)
@@ -66,6 +77,12 @@ local master_postinit = function(inst)
 	-- changes up his diet a bit so it only allows minerals
 	inst.components.eater:SetDiet({FOODTYPE.ELEMENTAL, FOODTYPE.WOLLUM}, {FOODTYPE.ELEMENTAL, FOODTYPE.WOLLUM})
 	inst.components.eater:SetOnEatFn(OnEat)
+
+	-- glows in the dark after eating orange gem; must be enabled
+	inst.entity:AddLight()
+	inst.Light:SetIntensity(0.8)
+	inst.Light:SetRadius(1.5)
+	inst.Light:SetFalloff(0.5)
 
 	-- Damage multiplier (optional)
     inst.components.combat.damagemultiplier = 1
