@@ -49,8 +49,7 @@ local function OnEat(inst, food)
 			end)
 	end
 	if food.prefab == "orangegem" then
-		inst:PushEvent("yawn", { grogginess = 4, knockoutduration = TUNING.MANDRAKE_SLEEP_TIME})
-		inst.components.sleeper:AddSleepiness(7, TUNING.MANDRAKE_SLEEP_TIME)
+		inst:PushEvent("yawn", {grogginess = 4, knockoutduration = TUNING.MANDRAKE_SLEEP_TIME})	-- this is how klei wants you to sleep characters
 	end
 
 	-- effects of eating food - hunger, health, sanity

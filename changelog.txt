@@ -1,3 +1,5 @@
+0.2.11: ah, only mobs should have sleeper - players use "pushevent"
+0.2.10: attempted hotfix for orange gem sleeping
 0.2.9: yellow and orange gem test
 0.2.3-8: testing out skins/bigportraits
 0.2.2: hotfix for crash
