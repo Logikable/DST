@@ -1,4 +1,4 @@
-# Wollum - The ____ ____
+# Wollum - The Geophagic Nomad
 ##### *"Rock solid." - Malphite*
 
 ### Introduction
